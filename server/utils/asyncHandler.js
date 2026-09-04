@@ -1,0 +1,10 @@
+/**
+ * Wraps an async route handler and forwards any rejected promise to
+ * Express's error-handling middleware via next(err), so controllers
+ * never need repetitive try/catch blocks.
+ */
+const asyncHandler = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
+
+export default asyncHandler;
